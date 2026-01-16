@@ -164,9 +164,14 @@ HelpdeskSystem/
 
 
 ### 📷 UI Screenshots
-![Landing Page](https://github.com/Sachin-4-5/BookCatalog/blob/main/BookCatalog.png)
+![Landing Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/Landing_Page.png)
+![Register Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/Register_Page.png)
+![Logged-in User Landing Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/User_Landing_Page.png)
+![Logged-in User Dashboard Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/User_Dashboard_Page.png)
+![Admin Dashboard Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/Admin_Dashboard_Page.png)
+![Admin Setting Page](https://github.com/Sachin-4-5/HelpdeskSystem/blob/main/Output%20Images/Admin_Dashboard_Page2.png)
 
----
+----
 <br />
 
 
