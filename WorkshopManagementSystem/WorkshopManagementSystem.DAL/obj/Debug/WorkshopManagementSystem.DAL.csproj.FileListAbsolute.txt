@@ -1,9 +1,0 @@
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\bin\Debug\WorkshopManagementSystem.DAL.dll
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\bin\Debug\WorkshopManagementSystem.DAL.pdb
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\bin\Debug\WorkshopManagementSystem.Models.dll
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\bin\Debug\WorkshopManagementSystem.Models.pdb
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\obj\Debug\WorkshopManagementSystem.DAL.csproj.AssemblyReference.cache
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\obj\Debug\WorkshopManagementSystem.DAL.csproj.CoreCompileInputs.cache
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\obj\Debug\Workshop.4F2D542C.Up2Date
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\obj\Debug\WorkshopManagementSystem.DAL.dll
-C:\Users\pr667\OneDrive\Desktop\Projects\ASP.NET Web Forms\WorkshopManagementSystem\WorkshopManagementSystem.DAL\obj\Debug\WorkshopManagementSystem.DAL.pdb

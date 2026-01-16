@@ -1,0 +1,67 @@
+﻿@page
+@model HelpdeskSystem.Pages.Tickets.DetailsModel
+@{
+    ViewData["Title"] = "Ticket Details";
+    var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+}
+
+<!-- PAGE HEADER -->
+<div class="mb-4">
+    <h2 class="fw-bold mb-1">🎫 Ticket Details</h2>
+    <small class="text-muted">
+        View complete information about your support ticket
+    </small>
+</div>
+
+<!-- DETAILS CARD -->
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <dl class="row mb-4">
+            <dt class="col-sm-3 text-muted">Title</dt>
+            <dd class="col-sm-9 fw-semibold">
+                @Model.Ticket.Title
+            </dd>
+
+            <dt class="col-sm-3 text-muted">Description</dt>
+            <dd class="col-sm-9">
+                @Model.Ticket.Description
+            </dd>
+
+            <dt class="col-sm-3 text-muted">Status</dt>
+            <dd class="col-sm-9">
+                @if (Model.Ticket.Status == "Open")
+                {
+                    <span class="badge bg-warning text-dark">Open</span>
+                }
+                else if (Model.Ticket.Status == "Resolved")
+                {
+                    <span class="badge bg-success">Resolved</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@Model.Ticket.Status</span>
+                }
+            </dd>
+        </dl>
+
+        <!-- ACTION BUTTONS -->
+        <div class="d-flex gap-2">
+
+            @if (Model.Ticket.CreatedBy == currentUserId || User.IsInRole("Admin"))
+            {
+                <a asp-page="Edit"
+                   asp-route-id="@Model.Ticket.Id"
+                   class="btn btn-warning">
+                    ✏️ Edit
+                </a>
+            }
+
+            <a asp-page="Index"
+               class="btn btn-outline-secondary">
+                ← Back to Tickets
+            </a>
+        </div>
+
+    </div>
+</div>

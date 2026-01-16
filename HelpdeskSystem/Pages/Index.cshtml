@@ -1,0 +1,144 @@
+﻿@page
+@model IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <!-- ============================= -->
+    <!-- PUBLIC LANDING (NOT LOGGED IN) -->
+    <!-- ============================= -->
+
+    <section class="hero-split">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-md-6 text-center text-md-start">
+                    <h1 class="display-5 fw-bold">Modern Helpdesk System</h1>
+                    <p class="lead text-muted mt-3">
+                        Streamline customer support with powerful ticket tracking,
+                        role-based access, and real-time dashboards.
+                    </p>
+                    <div class="mt-4">
+                        <button class="btn btn-primary btn-lg me-2"
+                                data-bs-toggle="modal"
+                                data-bs-target="#loginModal">
+                            Get Started
+                        </button>
+
+                        <button class="btn btn-outline-secondary btn-lg"
+                                data-bs-toggle="modal"
+                                data-bs-target="#registerModal">
+                            Register
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RIGHT IMAGE -->
+                <div class="col-md-6 text-center mt-4 mt-md-0">
+                    <img src="~/images/helpdesk-banner-1.jpg"
+                         class="img-fluid hero-image"
+                         alt="Helpdesk Illustration" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="container py-5 text-center">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>🎫 Ticket Management</h4>
+                <p class="text-muted">
+                    Create, track, and resolve issues efficiently.
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <h4>📊 Smart Dashboards</h4>
+                <p class="text-muted">
+                    Monitor performance in real time.
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <h4>🔐 Secure Access</h4>
+                <p class="text-muted">
+                    Role-based authorization for safety.
+                </p>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <!-- ============================= -->
+    <!-- AUTHENTICATED LANDING -->
+    <!-- ============================= -->
+
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">
+                👋 Welcome back,
+                <span class="text-primary">
+                    @User.FindFirst("FullName")?.Value
+                </span>
+            </h2>
+
+            <p class="text-muted mt-2">
+                Manage your tickets and track progress from your dashboard.
+            </p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="fw-semibold">🎫 My Tickets</h5>
+                        <p class="text-muted small">
+                            View and manage your submitted tickets
+                        </p>
+                        <a asp-page="/Tickets/Index" class="btn btn-outline-primary">
+                            View Tickets
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="fw-semibold">➕ Create Ticket</h5>
+                        <p class="text-muted small">
+                            Report a new issue or request
+                        </p>
+                        <a asp-page="/Tickets/Create" class="btn btn-outline-success">
+                            Create Ticket
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h5 class="fw-semibold">📊 Dashboard</h5>
+                        <p class="text-muted small">
+                            Track ticket status and activity
+                        </p>
+                        <a asp-page="/Dashboard/Index" class="btn btn-outline-dark">
+                            Go to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+}

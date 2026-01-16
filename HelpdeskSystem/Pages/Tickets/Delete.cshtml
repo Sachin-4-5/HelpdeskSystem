@@ -1,0 +1,48 @@
+﻿@page
+@model HelpdeskSystem.Pages.Tickets.DeleteModel
+@{
+    ViewData["Title"] = "Delete Ticket";
+}
+
+<!-- PAGE HEADER -->
+<div class="mb-4">
+    <h2 class="fw-bold text-danger mb-1">🗑️ Delete Ticket</h2>
+    <small class="text-muted">
+        This action cannot be undone
+    </small>
+</div>
+
+<!-- WARNING ALERT -->
+<div class="alert alert-warning d-flex align-items-center">
+    <span class="me-2">⚠️</span>
+    <strong>Are you sure you want to permanently delete this ticket?</strong>
+</div>
+
+<!-- DELETE CONFIRMATION CARD -->
+<div class="card shadow-sm border-danger">
+    <div class="card-body">
+
+        <h6 class="mb-3 text-muted">Ticket Information</h6>
+
+        <p class="mb-4">
+            <strong>Title:</strong><br />
+            <span class="fs-5">@Model.Ticket.Title</span>
+        </p>
+
+        <form method="post">
+            <input type="hidden" asp-for="Ticket.Id" />
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger">
+                    ❌ Yes, Delete Ticket
+                </button>
+
+                <a asp-page="Index"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>

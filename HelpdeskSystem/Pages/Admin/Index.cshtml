@@ -1,0 +1,97 @@
+﻿@page
+@model Admin.IndexModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<!-- PAGE HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">
+            🛡️ Admin Dashboard
+        </h2>
+        <small class="text-muted">
+            System-wide overview and administrative controls
+        </small>
+    </div>
+
+    <span class="badge bg-danger">
+        Admin Only
+    </span>
+</div>
+
+<!-- ADMIN STATS -->
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-start border-primary border-4">
+            <div class="card-body">
+                <h6 class="text-muted mb-1">👤 Total Users</h6>
+                <h3 class="fw-bold mb-0">42</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-start border-warning border-4">
+            <div class="card-body">
+                <h6 class="text-muted mb-1">🎫 Open Tickets</h6>
+                <h3 class="fw-bold text-warning mb-0">18</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-start border-success border-4">
+            <div class="card-body">
+                <h6 class="text-muted mb-1">✅ Resolved</h6>
+                <h3 class="fw-bold text-success mb-0">30</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-start border-danger border-4">
+            <div class="card-body">
+                <h6 class="text-muted mb-1">⏰ Overdue</h6>
+                <h3 class="fw-bold text-danger mb-0">3</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ADMIN ACTIONS -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="mb-3">Administrative Actions</h5>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <a href="#"
+                   class="card text-decoration-none shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-1">👤 Manage Users</h6>
+                        <small class="text-muted">
+                            Create, edit, assign roles and deactivate users
+                        </small>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="#"
+                   class="card text-decoration-none shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-1">⚙️ System Settings</h6>
+                        <small class="text-muted">
+                            Configure application behavior and defaults
+                        </small>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

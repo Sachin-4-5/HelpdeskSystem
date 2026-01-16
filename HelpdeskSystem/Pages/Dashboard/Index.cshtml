@@ -1,0 +1,271 @@
+﻿@page
+@model Dashboard.IndexModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- ===================== -->
+<!-- DASHBOARD HEADER -->
+<!-- ===================== -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-5">
+    <div>
+        <h2 class="fw-bold mb-1">
+            👋 Welcome back,
+            <span class="text-primary">
+                @User.FindFirst("FullName")?.Value
+            </span>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <span class="badge bg-warning text-dark ms-2">ADMIN</span>
+            }
+        </h2>
+
+        <p class="text-muted mb-0">
+            @if (User.IsInRole("Admin"))
+            {
+                <span>Here’s an overview of system-wide helpdesk activity</span>
+            }
+            else
+            {
+                <span>Here’s a snapshot of your helpdesk activity</span>
+            }
+        </p>
+    </div>
+
+    <div class="mt-3 mt-md-0 d-flex gap-2">
+        <a asp-page="/Tickets/Create" class="btn btn-primary">
+            ➕ New Ticket
+        </a>
+
+        <a asp-page="/Tickets/Index" class="btn btn-outline-secondary">
+            🎫 @(User.IsInRole("Admin") ? "All Tickets" : "My Tickets")
+        </a>
+    </div>
+</div>
+
+
+
+<!-- ===================== -->
+<!-- STATS CARDS -->
+<!-- ===================== -->
+<div class="row g-4 mb-5">
+
+    <!-- TOTAL / MY TICKETS -->
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100 text-white"
+             style="background: linear-gradient(135deg, #4e73df, #224abe);">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-uppercase small mb-1">
+                        @(User.IsInRole("Admin") ? "All Tickets" : "My Tickets")
+                    </h6>
+                    <h2 class="fw-bold mb-0">@Model.Summary.TotalTickets</h2>
+                    <small class="opacity-75">All time</small>
+                </div>
+                <div class="fs-1 opacity-75">🎫</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPEN -->
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100 text-white"
+             style="background: linear-gradient(135deg, #f6c23e, #dda20a);">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-uppercase small mb-1">Open</h6>
+                    <h2 class="fw-bold mb-0">@Model.Summary.OpenTickets</h2>
+                    <small class="opacity-75">Needs action</small>
+                </div>
+                <div class="fs-1 opacity-75">⏳</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESOLVED -->
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100 text-white"
+             style="background: linear-gradient(135deg, #1cc88a, #13855c);">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-uppercase small mb-1">Resolved</h6>
+                    <h2 class="fw-bold mb-0"> @Model.Summary.ResolvedTickets</h2>
+                    <small class="opacity-75">Closed</small>
+                </div>
+                <div class="fs-1 opacity-75">✅</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN ONLY -->
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm h-100 text-white"
+                 style="background: linear-gradient(135deg, #343a40, #000000);">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase small mb-1">Users</h6>
+                        <h2 class="fw-bold mb-0">@Model.Summary.TotalUsers</h2>
+                        <small class="opacity-75">Registered</small>
+                    </div>
+                    <div class="fs-1 opacity-75">👥</div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+
+<!-- ===================== -->
+<!-- RECENT TICKETS -->
+<!-- ===================== -->
+<div class="card border-0 shadow-sm mb-5">
+    <div class="card-body">
+
+        <!-- HEADER (from new version) -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h5 class="fw-semibold mb-0">🕒 Recent Tickets</h5>
+                <small class="text-muted">
+                    @(User.IsInRole("Admin")
+                        ? "Latest tickets across the system"
+                        : "Your most recent support requests")
+                </small>
+            </div>
+
+            <a asp-page="/Tickets/Index" class="small text-decoration-none">
+                View all →
+            </a>
+        </div>
+
+        <!-- TABLE (kept exactly like old interactive version) -->
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.RecentTickets.Any())
+                {
+                    @foreach (var ticket in Model.RecentTickets)
+                    {
+                        <tr>
+                            <td>@ticket.Title</td>
+
+                            <td>
+                                @if (ticket.Status == "Open")
+                                {
+                                    <span class="badge rounded-pill bg-warning text-dark">Open</span>
+                                }
+                                else if (ticket.Status == "Resolved")
+                                {
+                                    <span class="badge rounded-pill bg-success">Resolved</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill bg-secondary">@ticket.Status</span>
+                                }
+                            </td>
+                            <td>@ticket.CreatedOn.ToLocalTime().ToString("dd MMM yyyy")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <!-- EMPTY STATE (from new version) -->
+                    <tr>
+                        <td colspan="3" class="text-center py-5 text-muted">
+                            <div class="mb-2 fs-3">📭</div>
+                            <div class="fw-semibold">No recent tickets</div>
+                            <small>
+                                @(User.IsInRole("Admin")
+                                    ? "No tickets have been created yet."
+                                    : "You haven’t created any tickets yet.")
+                            </small>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<!-- ===================== -->
+<!-- QUICK ACTIONS -->
+<!-- ===================== -->
+<div class="row g-4">
+
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="fs-2 mb-2">➕</div>
+                <h6 class="fw-semibold">Create Ticket</h6>
+                <p class="text-muted small">Report a new issue</p>
+                <a asp-page="/Tickets/Create" class="btn btn-outline-primary btn-sm">
+                    Create
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="fs-2 mb-2">📊</div>
+                <h6 class="fw-semibold">
+                    @(User.IsInRole("Admin") ? "Admin Dashboard" : "My Dashboard")
+                </h6>
+                <p class="text-muted small">
+                    Monitor ticket activity
+                </p>
+                <a asp-page="/Dashboard/Index" class="btn btn-outline-secondary btn-sm">
+                    View
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-@(User.IsInRole("Admin") ? "3" : "4")">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="fs-2 mb-2">⚙️</div>
+                <h6 class="fw-semibold">Profile Settings</h6>
+                <p class="text-muted small">
+                    Manage account preferences
+                </p>
+                <button class="btn btn-outline-dark btn-sm" disabled>
+                    Coming soon
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-12 col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="fs-2 mb-2">🛠️</div>
+                    <h6 class="fw-semibold">Admin Tools</h6>
+                    <p class="text-muted small">Manage users & tickets</p>
+                    <a asp-page="/Admin/Index" class="btn btn-outline-dark btn-sm">
+                        Open
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
