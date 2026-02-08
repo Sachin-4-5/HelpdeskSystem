@@ -89,7 +89,7 @@ This application demonstrates how a production-ready Razor Pages application sho
 
 
 
-### 🎯 Key Learnings from This Project
+### 🎯 Key Learnings from this project
 ✅ Razor Pages architecture & lifecycle <br />
 ✅ Difference between Web Forms, MVC & Razor Pages <br />
 ✅ PageModel handlers (OnGet, OnPost) <br />
